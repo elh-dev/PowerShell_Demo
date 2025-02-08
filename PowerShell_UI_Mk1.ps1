@@ -20,18 +20,25 @@ param (
 $ScriptDir = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
 
 # Assign default values to parameters if not provided
+# Automation
 if (-not $CopyToSteamPath) { $CopyToSteamPath = "$ScriptDir\Automation\Copy_to_Steam.ps1" }
+if (-not $UploadtoGitHub) { $UploadtoGitHub = "$ScriptDir\Automation\Upload_to_github.ps1" }
+#Control
+    #Module
 if (-not $UninstallModulePath) { $UninstallModulePath = "$ScriptDir\Control\Module\UnInstall_Module.ps1" }
+    #Path
 if (-not $AddToPathPath) { $AddToPathPath = "$ScriptDir\Control\Path\Add_to_Path1.ps1" }
+#
 if (-not $ExportFromZIPPath) { $ExportFromZIPPath = "$ScriptDir\Control\Export_from_ZIP.ps1" }
 if (-not $PowerOffPath) { $PowerOffPath = "$ScriptDir\Control\PowerOff.ps1" }
 if (-not $QuitAppForcePath) { $QuitAppForcePath = "$ScriptDir\Control\Quit_App_Force.ps1" }
 if (-not $RestartPath) { $RestartPath = "$ScriptDir\Control\Restart.ps1" }
 if (-not $ShortcutCreatePath) { $ShortcutCreatePath = "$ScriptDir\Control\Shortcut_Create.ps1" }
 if (-not $HEICtoPNGPath) { $HEICtoPNGPath = "$ScriptDir\Converters\HEIC_to_PNG_ConverterMk2.ps1" }
+# Game
 if (-not $DNDGamePath) { $DNDGamePath = "$ScriptDir\Game\DND_Mk1.ps1" }
 if (-not $GameQAPath) { $GameQAPath = "$ScriptDir\Game\Game_Q&A.ps1" }
-
+# System Info
 if (-not $DiscSpacePath) { $DiscSpacePath = "$ScriptDir\SystemInfo1\DiscSpace.ps1" }
 if (-not $UpTimePath) { $UpTimePath = "$ScriptDir\SystemInfo1\UpTime.ps1" }
 if (-not $OSVersionPath) { $OSVersionPath = "$ScriptDir\SystemInfo1\OSVersion.ps1" }
@@ -62,11 +69,20 @@ do {
         1 {
             Menu -title "Automation" -texts @(
                 "1: Copy to Steam Library",
+                "2: Upload to GiHub",
                 "0: EXIT"
             )
             $automationOption = Read-Host -Prompt "ENTER"
-            if ($automationOption -eq "1") {
-                . $CopyToSteamPath
+            
+            switch ($automationOption) {
+                1 { 
+                    . $CopyToSteamPath 
+                }
+                2 { 
+                    . $UploadtoGitHub 
+                }
+                0 {  }
+                Default {}
             }
         }
         2 {
@@ -89,7 +105,9 @@ do {
                     )
                     $module = Read-Host -prompt "ENTER"
                     switch ($module) {
-                        1 { . $UninstallModulePath }
+                        1 { 
+                            . $UninstallModulePath 
+                        }
                         0 { }
                         Default {}
                     }
@@ -101,7 +119,9 @@ do {
                     )
                     $path = Read-Host -prompt "ENTER"
                     switch ($path) {
-                        1 { . $AddToPathPath }
+                        1 { 
+                            . $AddToPathPath 
+                        }
                         0 { }
                         Default {}
                     }
@@ -135,9 +155,14 @@ do {
                 "0: EXIT"
             )
             $conversionOption = Read-Host -Prompt "ENTER"
-            if ($conversionOption -eq "1") {
-                . $HEICtoPNGPath
+            switch ($convert) {
+                1 { 
+                    . $HEICtoPNGPath 
+                }
+                0 { }
+                Default {}
             }
+            
         }
         4 {
             Menu -title "Game" -texts @(
@@ -147,8 +172,12 @@ do {
             )
             $gameOption = Read-Host -Prompt "ENTER"
             switch ($gameOption) {
-                1 { . $DNDGamePath }
-                2 { . $GameQAPath }
+                1 { 
+                    . $DNDGamePath 
+                }
+                2 { 
+                    . $GameQAPath 
+                }
                 0 {  }
                 Default {}
             }
@@ -163,10 +192,18 @@ do {
             )
             $SystemInfoOption = Read-Host -Prompt "ENTER"
             switch ($SystemInfoOption) {
-                1 { . $DiscSpacePath}
-                2 { . $UpTimePath}
-                3 { . $OSVersionPath}
-                4 { . $InstalledSoftwearPath}
+                1 { 
+                    . $DiscSpacePath
+                }
+                2 { 
+                    . $UpTimePath
+                }
+                3 { 
+                    . $OSVersionPath
+                }
+                4 { 
+                    . $InstalledSoftwearPath
+                }
                 0 {  }
                 Default {}
             }

@@ -1,6 +1,8 @@
-# Import module using relative path
-Import-Module -Name "$ScriptDir\ELH_Library.psm1"
+# Get the directory of the current script
+$ScriptDir = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
 
+# Import module using relative path
+Import-Module -Name "$ScriptDir\..\..\ELH_Library.psm1"
 
  # Loop for menu
 do {

@@ -5,7 +5,7 @@ $ScriptDir = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
 Import-Module -Name "$ScriptDir\..\ELH_Library.psm1"
 
 # Menu Screen
-Menu -title "Force Quit App" -texts @("0: EXIT", "ENTER: View Disc Sace")
+Menu -title "Installed Softwear" -texts @("0: EXIT", "ENTER: View Disc Sace")
 
 # Add an Exit button prompt
 $exitChoice = Read-Host -Prompt "ENTER"
@@ -14,7 +14,8 @@ if ($exitChoice -eq "0") {
     exit
 }
 
-# PowerShell script to forcefully close App
+$installedSoftware = Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object -Property DisplayName, DisplayVersion
+  
+# print details 
 
-$app = Read-Host -prompt "Enter .exe file e.g.(steam.exe)"
-taskkill.exe /F /IM $app
+Write-Output $installedSoftware

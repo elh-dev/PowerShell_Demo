@@ -1,6 +1,18 @@
-# Import module using relative path
-Import-Module -Name "$ScriptDir\ELH_Library.psm1"
+# Get the directory of the current script
+$ScriptDir = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
 
+# Import module using relative path
+Import-Module -Name "$ScriptDir\..\ELH_Library.psm1"
+
+# Menu Screen
+Menu -title "Question & Answer Game" -texts @("0: EXIT", "ENTER: View Disc Sace")
+
+# Add an Exit button prompt
+$exitChoice = Read-Host -Prompt "ENTER"
+if ($exitChoice -eq "0") {
+    Menu -title "Exiting script..."
+    exit
+}
 # Define the questions and answers
 $questions = @{
     "What is my name" = @("Ed", "elh-dev")

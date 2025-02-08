@@ -1,18 +1,22 @@
+# Get the directory of the current script
+$ScriptDir = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
+
 # Import module using relative path
-Import-Module -Name "$ScriptDir\ELH_Library.psm1"
+Import-Module -Name "$ScriptDir\..\ELH_Library.psm1"
 
 # Menu Screen
-Menu -title "Copy to Steam Library"
+Menu -title "Copy to Steam" -texts @("0: EXIT", "ENTER: View Disc Sace")
 
 # Add an Exit button prompt
-$exitChoice = Read-Host -Prompt "Type '0' to close the script or press Enter to continue"
+$exitChoice = Read-Host -Prompt "ENTER"
 if ($exitChoice -eq "0") {
-    Write-Output "Exiting script..."
+    Menu -title "Exiting script..."
     exit
 }
 
 # Define the directory to monitor
-$sourceDirectory = Read-Host -prompt "Enter Folder Path (D:\Games\Helldivers 2)"
+$sourceDirectory = Read-Host -prompt "Enter Source Path (D:\Games\Helldivers 2)"
+
 # Define the destination directory
 $destinationDirectory = "C:\Program Files (x86)\Steam\steamapps\common"
 

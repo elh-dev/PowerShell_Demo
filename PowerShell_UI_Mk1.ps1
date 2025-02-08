@@ -10,7 +10,10 @@ param (
     [string]$ShortcutCreatePath,
     [string]$HEICtoPNGPath,
     [string]$DNDGamePath,
-    [string]$GameQAPath
+    [string]$GameQAPath,
+    [string]$DiscSpacePath,
+    [string]$UpTimePath,
+    [string]$OSVersionPath
 )
 
 # Get the directory of the current script
@@ -26,8 +29,13 @@ if (-not $QuitAppForcePath) { $QuitAppForcePath = "$ScriptDir\Control\Quit_App_F
 if (-not $RestartPath) { $RestartPath = "$ScriptDir\Control\Restart.ps1" }
 if (-not $ShortcutCreatePath) { $ShortcutCreatePath = "$ScriptDir\Control\Shortcut_Create.ps1" }
 if (-not $HEICtoPNGPath) { $HEICtoPNGPath = "$ScriptDir\Converters\HEIC_to_PNG_ConverterMk2.ps1" }
-if (-not $DNDGamePath) { $DNDGamePath = "$ScriptDir\Game\DND_Mk4.ps1" }
+if (-not $DNDGamePath) { $DNDGamePath = "$ScriptDir\Game\DND_Mk1.ps1" }
 if (-not $GameQAPath) { $GameQAPath = "$ScriptDir\Game\Game_Q&A.ps1" }
+
+if (-not $DiscSpacePath) { $DiscSpacePath = "$ScriptDir\SystemInfo1\DiscSpace.ps1" }
+if (-not $UpTimePath) { $UpTimePath = "$ScriptDir\SystemInfo1\UpTime.ps1" }
+if (-not $OSVersionPath) { $OSVersionPath = "$ScriptDir\SystemInfo1\OSVersion.ps1" }
+if (-not $InstalledSoftwearPath) { $InstalledSoftwearPath = "$ScriptDir\SystemInfo1\InstalledSoftwear.ps1" }
 
 # Import module using relative path
 Import-Module -Name "$ScriptDir\ELH_Library.psm1"
@@ -39,6 +47,7 @@ do {
         "2: Control",
         "3: Conversion",
         "4: Game",
+        "5: System Info",
         "0: EXIT"
     )
 
@@ -140,6 +149,24 @@ do {
             switch ($gameOption) {
                 1 { . $DNDGamePath }
                 2 { . $GameQAPath }
+                0 {  }
+                Default {}
+            }
+        }
+        5 {
+            Menu -title "System Info" -texts @(
+                "1: Disc Space",
+                "2: Up Time",
+                "3: OS Version",
+                "4: Installed Softwear"
+                "0: EXIT"
+            )
+            $SystemInfoOption = Read-Host -Prompt "ENTER"
+            switch ($SystemInfoOption) {
+                1 { . $DiscSpacePath}
+                2 { . $UpTimePath}
+                3 { . $OSVersionPath}
+                4 { . $InstalledSoftwearPath}
                 0 {  }
                 Default {}
             }

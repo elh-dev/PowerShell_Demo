@@ -1,5 +1,8 @@
+# Get the directory of the current script
+$ScriptDir = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
+
 # Import module using relative path
-Import-Module -Name "$ScriptDir\ELH_Library.psm1"
+Import-Module -Name "$ScriptDir\..\ELH_Library.psm1"
 
 Menu -title "Create Shortcut" -texts @("1: File", "2: Folder", "0: Quit")
 $option = Read-Host -Prompt 'Enter'

@@ -65,9 +65,10 @@ function Menu {
     }
 }
 
+
 # Example usage:
-# Menu2 -title "Menu Title" -texts @("Option 1", "Option 2", "Option 3")
-# Menu2 -title "Menu Title"
+# Menu -title "Menu Title" -texts @("Option 1", "Option 2", "Option 3")
+# Menu -title "Menu Title"
 
 function Get-FileHashMap {
     param (

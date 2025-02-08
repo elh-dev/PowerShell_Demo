@@ -1,5 +1,11 @@
+# Get the directory of the current script
+$ScriptDir = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
+
 # Import module using relative path
-Import-Module -Name "$ScriptDir\ELH_Library.psm1"
+Import-Module -Name "$ScriptDir\..\ELH_Library.psm1"
+
+
+
 function Convert-HEICtoPNG {
     param (
         [string]$inputFile,
@@ -9,8 +15,6 @@ function Convert-HEICtoPNG {
     $convertCommand = "magick ""$inputFile"" ""$outputFile"""
     Invoke-Expression $convertCommand
 }
-
-
 # Function to Display Menu
 
 
